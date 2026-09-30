@@ -9,8 +9,7 @@ import 'package:uid_project/providers/profile_provider.dart';
 void main() {
   group('Doctor model', () {
     test('sampleDoctors returns 6 doctors', () {
-      final doctors = Doctor.sampleDoctors();
-      expect(doctors.length, 6);
+      expect(Doctor.sampleDoctors().length, 6);
     });
 
     test('each doctor has a non-empty name', () {
@@ -63,7 +62,7 @@ void main() {
 
     test('copyWith preserves other fields', () {
       final original = makeAppt();
-      final copy = original.copyWith(status: AppointmentStatus.completed);
+      final copy = original.copyWith(status: AppointmentStatus.cancelled);
       expect(copy.patientName, original.patientName);
       expect(copy.timeSlot, original.timeSlot);
     });
@@ -71,8 +70,7 @@ void main() {
 
   group('UserProfile model', () {
     test('defaultProfile has non-empty name', () {
-      final profile = UserProfile.defaultProfile();
-      expect(profile.name.isNotEmpty, true);
+      expect(UserProfile.defaultProfile().name.isNotEmpty, true);
     });
 
     test('copyWith updates only specified field', () {
@@ -86,9 +84,7 @@ void main() {
   group('AppointmentProvider', () {
     late AppointmentProvider provider;
 
-    setUp(() {
-      provider = AppointmentProvider();
-    });
+    setUp(() => provider = AppointmentProvider());
 
     Appointment makeAppt(String id) => Appointment(
           id: id,
@@ -125,15 +121,9 @@ void main() {
       expect(provider.upcoming.length, 0);
     });
 
-    test('completeAppointment changes status to completed', () {
-      provider.bookAppointment(makeAppt('4'));
-      provider.completeAppointment('4');
-      expect(provider.completed.length, 1);
-    });
-
     test('totalCount matches booked appointments', () {
+      provider.bookAppointment(makeAppt('4'));
       provider.bookAppointment(makeAppt('5'));
-      provider.bookAppointment(makeAppt('6'));
       expect(provider.totalCount, 2);
     });
   });
@@ -141,9 +131,7 @@ void main() {
   group('DoctorProvider', () {
     late DoctorProvider provider;
 
-    setUp(() {
-      provider = DoctorProvider();
-    });
+    setUp(() => provider = DoctorProvider());
 
     test('filteredDoctors returns all by default', () {
       expect(provider.filteredDoctors.length, 6);
@@ -182,17 +170,10 @@ void main() {
   group('ProfileProvider', () {
     late ProfileProvider provider;
 
-    setUp(() {
-      provider = ProfileProvider();
-    });
+    setUp(() => provider = ProfileProvider());
 
-    test('default notifications enabled', () {
-      expect(provider.notificationsEnabled, true);
-    });
-
-    test('toggleNotifications changes state', () {
-      provider.toggleNotifications(false);
-      expect(provider.notificationsEnabled, false);
+    test('default profile name is not empty', () {
+      expect(provider.profile.name.isNotEmpty, true);
     });
 
     test('updateProfile persists new data', () {

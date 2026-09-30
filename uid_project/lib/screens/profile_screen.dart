@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user_profile.dart';
-import '../providers/appointment_provider.dart';
 import '../providers/profile_provider.dart';
 import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
@@ -73,7 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profile = context.watch<ProfileProvider>().profile;
-    final apptProvider = context.watch<AppointmentProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -116,42 +114,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: Column(
                 children: [
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.2),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.5),
-                            width: 2,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.person,
-                            color: Colors.white70,
-                            size: 48,
-                          ),
-                        ),
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.5),
+                        width: 2,
                       ),
-                      if (_isEditing)
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: AppTheme.accent,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                        ),
-                    ],
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white70,
+                        size: 48,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -168,41 +148,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 13,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Appointment stats
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: StatCard(
-                      value: apptProvider.totalCount.toString(),
-                      label: 'Total',
-                      icon: Icons.assignment,
-                      color: AppTheme.primary,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: StatCard(
-                      value: apptProvider.upcoming.length.toString(),
-                      label: 'Upcoming',
-                      icon: Icons.upcoming,
-                      color: AppTheme.warning,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: StatCard(
-                      value: apptProvider.completed.length.toString(),
-                      label: 'Done',
-                      icon: Icons.check_circle_outline,
-                      color: AppTheme.success,
                     ),
                   ),
                 ],
