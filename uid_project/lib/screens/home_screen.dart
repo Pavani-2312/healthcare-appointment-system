@@ -138,14 +138,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       _ActionButton(
-                        icon: Icons.health_and_safety,
-                        label: 'Health\nTips',
-                        color: AppTheme.accent,
-                        onTap: () =>
-                            Navigator.pushNamed(context, '/health-tips'),
-                      ),
-                      const SizedBox(width: 12),
-                      _ActionButton(
                         icon: Icons.person,
                         label: 'My\nProfile',
                         color: AppTheme.warning,

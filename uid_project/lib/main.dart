@@ -9,13 +9,11 @@ import 'package:provider/provider.dart';
 import 'providers/appointment_provider.dart';
 import 'providers/doctor_provider.dart';
 import 'providers/profile_provider.dart';
-import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/doctor_list_screen.dart';
 import 'screens/doctor_detail_screen.dart';
 import 'screens/book_appointment_screen.dart';
 import 'screens/my_appointments_screen.dart';
-import 'screens/health_tips_screen.dart';
 import 'screens/profile_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -38,15 +36,13 @@ class HealthCareApp extends StatelessWidget {
         title: 'HealthCare Appointments',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        initialRoute: '/',
+        initialRoute: '/home',
         routes: {
-          '/': (ctx) => const SplashScreen(),
           '/home': (ctx) => const HomeScreen(),
           '/doctors': (ctx) => const DoctorListScreen(),
           '/doctor-detail': (ctx) => const DoctorDetailScreen(),
           '/book-appointment': (ctx) => const BookAppointmentScreen(),
           '/appointments': (ctx) => const MyAppointmentsScreen(),
-          '/health-tips': (ctx) => const HealthTipsScreen(),
           '/profile': (ctx) => const ProfileScreen(),
         },
 
